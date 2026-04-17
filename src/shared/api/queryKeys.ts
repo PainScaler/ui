@@ -1,0 +1,28 @@
+import type { analysis } from "@/shared/api/models.gen";
+
+export const qk = {
+  segments: ["segments"] as const,
+  segmentGroups: ["segmentGroups"] as const,
+  serverGroups: ["serverGroups"] as const,
+  accessPolicies: ["accessPolicies"] as const,
+  appConnectors: ["appConnectors"] as const,
+  appConnectorGroups: ["appConnectorGroups"] as const,
+  scimGroups: ["scimGroups"] as const,
+  scimAttributeHeaders: ["scimAttributeHeaders"] as const,
+  postureProfiles: ["postureProfiles"] as const,
+  trustedNetworks: ["trustedNetworks"] as const,
+  certificates: ["certificates"] as const,
+  clientTypes: ["clientTypes"] as const,
+  platforms: ["platforms"] as const,
+  idpControllers: ["idpControllers"] as const,
+  index: ["index"] as const,
+  orphans: ["orphans"] as const,
+  overlaps: ["overlaps"] as const,
+  policyShadows: ["policyShadows"] as const,
+  orphanClusters: ["orphanClusters"] as const,
+  domainOverlaps: ["domainOverlaps"] as const,
+  connectorLoad: ["connectorLoad"] as const,
+  scimReach: ["scimReach"] as const,
+  routes: ["routes"] as const,
+  flowGraph: (body: analysis.GraphQueryBody) => ["flowGraph", body] as const,
+};

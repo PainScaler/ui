@@ -1,0 +1,94 @@
+/* -- Column colours (used as CSS vars for theming) -- */
+:root {
+  --flow-col-1: #7a7a72;
+  --flow-col-2: #185fa5;
+  --flow-col-3: #ba7517;
+  --flow-col-4: #1d9e75;
+  --flow-col-5: #534ab7;
+}
+
+/* -- Selection fade ---------------------------------------------------------- */
+.flow-node--faded {
+  opacity: 0.12;
+  transition: opacity 0.25s ease;
+}
+
+.flow-edge--faded .react-flow__edge-path {
+  opacity: 0.08;
+  transition: opacity 0.25s ease;
+}
+
+/* -- Highlighted edge animation -- */
+.flow-edge--highlighted .react-flow__edge-path {
+  stroke-dasharray: 8 4;
+  animation: flow-dash 0.6s linear infinite;
+  stroke-width: 2.5;
+  transition: opacity 0.25s ease;
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.flow-node--search-match > div {
+  outline: 2px solid #fbbf24;
+  outline-offset: 1px;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.flow-node--selected > div {
+  outline: 2px solid #ffffff;
+  outline-offset: 1px;
+}
+
+.flow-filter-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+}
+
+.flow-filter-overlay .pf-v6-c-button {
+  border-radius: 999px;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transition: width 220ms ease, padding 220ms ease, gap 220ms ease;
+}
+
+.flow-filter-overlay .pf-v6-c-button > * {
+  margin: 0;
+}
+
+.flow-filter-overlay:hover .pf-v6-c-button,
+.flow-filter-overlay .pf-v6-c-button:focus-visible,
+.flow-filter-overlay--active .pf-v6-c-button {
+  width: 120px;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.flow-filter-overlay .flow-filter-label {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  line-height: 1;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 220ms ease;
+}
+
+.flow-filter-overlay:hover .flow-filter-label,
+.flow-filter-overlay .pf-v6-c-button:focus-visible .flow-filter-label,
+.flow-filter-overlay--active .flow-filter-label {
+  max-width: 120px;
+}

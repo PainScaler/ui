@@ -1,0 +1,56 @@
+@keyframes pf-spin {
+  to { transform: rotate(360deg); }
+}
+
+:root {
+  --brand-red-900: #7b1a12;
+  --brand-red-700: #a52a20;
+  --brand-red-500: #c0392b;
+  --brand-red-300: #a03020;
+  --brand-red-100: #f5c6c6;
+  --brand-bg-abyss: #0d0303;
+  --brand-bg-track: #2a0808;
+  --brand-text-mute: #2e0a0a;
+  --brand-accent-flare: #ff6a3d;
+
+  --scrollbar-size: 10px;
+  --scrollbar-thumb: rgba(100, 100, 100, 0.45);
+  --scrollbar-thumb-hover: rgba(100, 100, 100, 0.75);
+  --scrollbar-track: transparent;
+}
+
+.pf-v6-theme-dark {
+  --scrollbar-thumb: rgba(200, 200, 200, 0.25);
+  --scrollbar-thumb-hover: rgba(220, 220, 220, 0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 160ms ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
