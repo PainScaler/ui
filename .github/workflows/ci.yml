@@ -26,15 +26,21 @@ jobs:
       - run: yarn typecheck
 
       - name: test + coverage
-        run: yarn test --run --coverage --coverage.reporter=text-summary --coverage.reporter=lcov
+        run: |
+          yarn test --run --coverage \
+            --coverage.reporter=text-summary \
+            --coverage.reporter=lcov \
+            2>&1 | tee test-output.log
 
       - name: coverage summary
         if: always()
         run: |
-          if [ -f coverage/coverage-summary.json ] || [ -f coverage/lcov-report/index.html ]; then
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-            yarn --silent test --run --coverage --coverage.reporter=text-summary 2>&1 | tail -20 >> "$GITHUB_STEP_SUMMARY" || true
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f test-output.log ]; then
+            {
+              echo '```'
+              awk '/Coverage summary/{flag=1} flag{print} /^={3,}$/{if(flag) flag=0}' test-output.log
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - uses: actions/upload-artifact@v4
@@ -42,6 +48,7 @@ jobs:
         with:
           name: coverage
           path: coverage
+          if-no-files-found: warn
 
       - run: yarn build
 

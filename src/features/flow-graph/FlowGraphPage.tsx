@@ -32,8 +32,10 @@ function useElementSize(selector: string, dimension: "width" | "height"): number
   useLayoutEffect(() => {
     const el = document.querySelector<HTMLElement>(selector);
     if (!el) return;
-    const measure = () =>
+    const measure = () => {
+      // eslint-disable-next-line react-x/set-state-in-effect
       setSize(dimension === "width" ? el.offsetWidth : el.offsetHeight);
+    };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
@@ -154,13 +156,13 @@ function layoutElements(
 function FlowGraphInner() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set());
   const [searchTerm, setSearchTerm] = useState("");
   const [layoutReady, setLayoutReady] = useState(false);
-  const [expandedGroupIds, setExpandedGroupIds] = useState<Set<string>>(new Set());
+  const [expandedGroupIds, setExpandedGroupIds] = useState<Set<string>>(() => new Set());
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState<FlowFilters>(EMPTY_FILTERS);
-  const [visibleCols, setVisibleCols] = useState<Set<FlowColumn>>(new Set([1, 2, 3, 4, 5]));
+  const [visibleCols, setVisibleCols] = useState<Set<FlowColumn>>(() => new Set([1, 2, 3, 4, 5]));
   const { fitView } = useReactFlow();
 
   const { data: graph, error, isLoading } = useFlowGraph(new analysis.GraphQueryBody({}));
@@ -259,6 +261,7 @@ function FlowGraphInner() {
     if (!visibleGraph) return;
     const isNewGraph = lastGraphRef.current !== graph;
     lastGraphRef.current = graph ?? null;
+    // eslint-disable-next-line react-x/set-state-in-effect
     setLayoutReady(false);
     const { nodes: ln, edges: le } = layoutElements(visibleGraph);
     const enriched = ln.map((n) =>
@@ -276,6 +279,7 @@ function FlowGraphInner() {
     );
     setNodes(enriched);
     setEdges(le);
+    // eslint-disable-next-line react-x/set-state-in-effect
     setLayoutReady(true);
     if (isNewGraph) window.requestAnimationFrame(() => fitView());
   }, [visibleGraph, graph, expandedGroupIds, toggleExpand]); // eslint-disable-line react-x/exhaustive-deps

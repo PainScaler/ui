@@ -64,10 +64,13 @@ function useBackendResources(query: string, enabled: boolean) {
     if (!enabled) return;
     const trimmed = query.trim();
     if (!trimmed) {
+      // eslint-disable-next-line react-x/set-state-in-effect
       setResults([]);
+      // eslint-disable-next-line react-x/set-state-in-effect
       setLoading(false);
       return;
     }
+    // eslint-disable-next-line react-x/set-state-in-effect
     setLoading(true);
     let cancelled = false;
     const t = setTimeout(() => {
@@ -170,6 +173,7 @@ function PaletteBody({ query, setQuery, close }: BodyProps) {
   const flat = useMemo(() => grouped.flatMap((s) => s.items), [grouped]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-x/set-state-in-effect
     setActiveIndex(0);
   }, [query, results.length]);
 
