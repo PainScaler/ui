@@ -1985,6 +1985,7 @@ export namespace server {
 		version: string;
 		commit: string;
 		date: string;
+		demo: boolean;
 
 		static createFrom(source: any = {}) {
 			return new About(source);
@@ -1995,6 +1996,7 @@ export namespace server {
 			this["version"] = source["version"];
 			this["commit"] = source["commit"];
 			this["date"] = source["date"];
+			this["demo"] = source["demo"];
 		}
 	}
 	export class CompareRequest {

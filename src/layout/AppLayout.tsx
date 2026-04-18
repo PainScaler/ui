@@ -8,6 +8,7 @@ import { resetScroll, initResizeScrollClamp } from "@/shared/lib/scroll";
 import { ErrorBoundary } from "@/app/ErrorBoundary";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { CommandPaletteProvider } from "@/shared/ui/CommandPalette";
+import { DemoBanner } from "@/shared/ui/DemoBanner";
 
 const MAIN_CONTENT_ID = "main-content";
 
@@ -29,6 +30,7 @@ export const AppLayout: React.FunctionComponent = () => {
 
   return (
     <Page
+      banner={<DemoBanner />}
       masthead={<AppMasthead />}
       sidebar={<AppSidebar />}
       isManagedSidebar

@@ -17,6 +17,7 @@
   --scrollbar-thumb: rgba(100, 100, 100, 0.45);
   --scrollbar-thumb-hover: rgba(100, 100, 100, 0.75);
   --scrollbar-track: transparent;
+  --pf-t--global--border--width--main--default: 0px;
 }
 
 .pf-v6-theme-dark {
@@ -54,3 +55,4 @@
 *::-webkit-scrollbar-corner {
   background: transparent;
 }
+
