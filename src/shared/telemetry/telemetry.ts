@@ -8,12 +8,12 @@ let buffer: logging.TelemetryEvent[] = [];
 let timer: ReturnType<typeof setInterval> | null = null;
 let started = false;
 
-type TrackInput = {
+interface TrackInput {
   type: "page_view" | "error";
   route?: string;
   error_message?: string;
   error_stack?: string;
-};
+}
 
 function makeEvent(input: TrackInput): logging.TelemetryEvent {
   return logging.TelemetryEvent.createFrom({

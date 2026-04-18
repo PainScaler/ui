@@ -19,7 +19,7 @@ function flattenPages(input: (Route | RouteGroup)[]): PaletteAction[] {
           description: parent ? `${parent} / ${r.label}` : r.path,
           keywords: [r.path.replace(/^\//, "")],
           group: "Pages",
-          onSelect: () => {},
+          onSelect: () => undefined,
         });
       }
     }
@@ -43,7 +43,7 @@ export function usePaletteActions({ close }: Deps): PaletteAction[] {
     const pages: PaletteAction[] = STATIC_PAGES.map((p) => ({
       ...p,
       onSelect: () => {
-        navigate(p.id.replace(/^page:/, ""));
+        void navigate(p.id.replace(/^page:/, ""));
         close();
       },
     }));
@@ -55,14 +55,16 @@ export function usePaletteActions({ close }: Deps): PaletteAction[] {
         description: "Reload all ZPA data from the tenant",
         keywords: ["reload", "sync", "fetch"],
         group: "Commands",
-        onSelect: async () => {
+        onSelect: () => {
           close();
-          try {
-            await Refresh();
-            await queryClient.invalidateQueries();
-          } catch (e) {
-            console.error("refresh failed", e);
-          }
+          void (async () => {
+            try {
+              await Refresh();
+              await queryClient.invalidateQueries();
+            } catch (e) {
+              console.error("refresh failed", e);
+            }
+          })();
         },
       },
       {

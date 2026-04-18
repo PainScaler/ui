@@ -141,7 +141,7 @@ function PaletteBody({ query, setQuery, close }: BodyProps) {
         group: "Resources",
         onSelect: () => {
           const path = RESOURCE_ROUTE[r.Type];
-          if (path) navigate(path);
+          if (path) void navigate(path);
           close();
         },
       })),

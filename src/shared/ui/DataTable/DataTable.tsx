@@ -28,6 +28,7 @@ import { DataTableEmptyState } from "./DataTableEmptyState";
 import CategoryModal from "./CategoryModal";
 import { RowDetailModal } from "./RowDetailModal";
 import { buildCsv, csvFilename, downloadCsv } from "./exportCsv";
+import { formatCell } from "./formatCell";
 import { useColumnStore } from "@/shared/stores/columnStore";
 
 const VIRTUALIZE_THRESHOLD = 200;
@@ -98,7 +99,7 @@ export function DataTable({
           ? { sortingFn: col.sortingFn as ColumnDef<Record<string, unknown>>["sortingFn"] }
           : {}),
         cell: (info) =>
-          col.render ? col.render(info.getValue()) : String(info.getValue() ?? ""),
+          col.render ? col.render(info.getValue()) : formatCell(info.getValue()),
       })),
     [columns],
   );

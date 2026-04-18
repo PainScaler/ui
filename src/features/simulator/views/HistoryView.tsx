@@ -6,6 +6,7 @@ import { Alert } from "@patternfly/react-core";
 import { parseColumns } from "@/shared/ui/DataTable/parseColumns";
 import { DataWrapper } from "@/shared/ui/DataTable/DataWrapper";
 import type { RowDetailModalProps } from "@/shared/ui/DataTable/types";
+import { formatCell } from "@/shared/ui/DataTable/formatCell";
 import {
   Modal,
   ModalHeader,
@@ -24,7 +25,7 @@ function RowSimulatioDetailModal({
   row,
   columns,
 }: RowDetailModalProps) {
-  const title = row ? String(row[columns[0]?.key] ?? "Details") : "Details";
+  const title = row ? formatCell(row[columns[0]?.key], "Details") : "Details";
 
   const result = simulator.DecisionResult.createFrom(
     row ? row.result_json : {},

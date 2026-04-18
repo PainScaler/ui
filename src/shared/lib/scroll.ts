@@ -13,7 +13,7 @@ export function resetScroll() {
 
 export function initResizeScrollClamp() {
   const main = document.getElementById(MAIN_CONTENT_ID);
-  if (!main) return () => {};
+  if (!main) return () => undefined;
   const observer = new ResizeObserver(() => {
     clampScrollTop(main);
     main.querySelectorAll(".pf-m-overflow-scroll").forEach(clampScrollTop);

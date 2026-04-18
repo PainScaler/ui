@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { Label, LabelGroup, Truncate } from "@patternfly/react-core";
+import { formatCell } from "./formatCell";
 
 export type Renderer = (value: unknown) => ReactNode;
 export type TextRenderer = (value: unknown) => string;
 
 export const defaultRenderer: Renderer = (v) => (
-  <Truncate content={String(v)} />
+  <Truncate content={formatCell(v)} />
 );
 
 /** Renders a boolean as a colored Yes/No label. */
@@ -34,7 +35,7 @@ export const labelArrayRenderer: Renderer = (v) => {
 
 /** Renders a string array as a comma-separated string. */
 export const joinRenderer: Renderer = (v) =>
-  Array.isArray(v) ? (v as string[]).join(", ") || "-" : String(v ?? "-");
+  Array.isArray(v) ? (v as string[]).join(", ") || "-" : formatCell(v, "-");
 
 /** Renders a Unix timestamp (seconds, as string or number) as a locale date string. */
 export const timestampRenderer: Renderer = (v) => {
@@ -46,14 +47,13 @@ export const timestampRenderer: Renderer = (v) => {
   return new Date(n * 1000).toLocaleString();
 };
 
-const defaultToText: TextRenderer = (v) =>
-  v === null || v === undefined ? "" : String(v);
+const defaultToText: TextRenderer = (v) => formatCell(v);
 
 const boolToText: TextRenderer = (v) => (v ? "Yes" : "No");
 
 const joinToText: TextRenderer = (v) => {
   if (!Array.isArray(v) || v.length === 0) return "";
-  return (v as unknown[]).map((x) => String(x ?? "")).join(", ");
+  return (v as unknown[]).map((x) => formatCell(x)).join(", ");
 };
 
 const timestampToText: TextRenderer = (v) => {

@@ -11,6 +11,7 @@ import {
   DescriptionListDescription,
 } from "@patternfly/react-core";
 import type { RowDetailModalProps } from "./types";
+import { formatCell } from "./formatCell";
 
 export function RowDetailModal({
   isOpen,
@@ -18,7 +19,7 @@ export function RowDetailModal({
   row,
   columns,
 }: RowDetailModalProps) {
-  const title = row ? String(row[columns[0]?.key] ?? "Details") : "Details";
+  const title = row ? formatCell(row[columns[0]?.key], "Details") : "Details";
 
   useCloseOnOutsideClick(isOpen, onClose);
 
@@ -43,7 +44,7 @@ export function RowDetailModal({
               <DescriptionListDescription>
                 {col.render
                   ? col.render(row?.[col.key])
-                  : String(row?.[col.key] ?? "")}
+                  : formatCell(row?.[col.key])}
               </DescriptionListDescription>
             </DescriptionListGroup>
           ))}

@@ -275,7 +275,7 @@ export function VirtualPolicyView() {
                 variant="primary"
                 isDisabled={!canRun}
                 isLoading={submitting}
-                onClick={handleRun}
+                onClick={() => void handleRun()}
               >
                 Run comparison
               </Button>

@@ -65,10 +65,10 @@ function ValidatedStepFooter({
           return;
         }
         onErrors(stepId, []);
-        goToNextStep();
+        void goToNextStep();
       }}
       onBack={() => goToPrevStep()}
-      onClose={() => {}}
+      onClose={() => undefined}
       isBackHidden={isFirst}
     />
   );
@@ -88,7 +88,7 @@ function SubmitFooter({
       activeStep={activeStep}
       onNext={onSubmit}
       onBack={() => goToPrevStep()}
-      onClose={() => {}}
+      onClose={() => undefined}
       nextButtonText="Run Simulation"
       isNextDisabled={submitting}
     />
@@ -325,7 +325,7 @@ export function SimContextWizard({ onRun }: Props) {
           name="Review & Submit"
           id="step-review"
           footer={
-            <SubmitFooter onSubmit={handleSubmit} submitting={submitting} />
+            <SubmitFooter onSubmit={() => void handleSubmit()} submitting={submitting} />
           }
         >
           <WizardBody hasNoPadding>

@@ -123,6 +123,7 @@ function layoutElements(
     g.setEdge(e.source, e.target);
   }
 
+  /* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
   dagre.layout(g);
 
   const nodes: Node[] = srcNodes.map((src) => {
@@ -138,6 +139,7 @@ function layoutElements(
       height: h,
     };
   });
+  /* eslint-enable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 
   const edges: Edge[] = srcEdges.map((e) => ({
     id: e.id,
@@ -263,6 +265,7 @@ function FlowGraphInner() {
       n.id.startsWith("sg:")
         ? {
             ...n,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             data: {
               ...n.data,
               expanded: expandedGroupIds.has(n.id),
@@ -275,7 +278,7 @@ function FlowGraphInner() {
     setEdges(le);
     setLayoutReady(true);
     if (isNewGraph) window.requestAnimationFrame(() => fitView());
-  }, [visibleGraph, graph, expandedGroupIds, toggleExpand]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [visibleGraph, graph, expandedGroupIds, toggleExpand]); // eslint-disable-line react-x/exhaustive-deps
 
   const routes = useMemo(() => routeData?.routes ?? [], [routeData]);
 
