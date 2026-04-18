@@ -147,7 +147,7 @@ function TopSection({
           <DescriptionListTerm>Matched rule</DescriptionListTerm>
           <DescriptionListDescription>
             {rule.name ?? rule.id ?? "-"}
-            {rule.ruleOrder != null && (
+            {rule.priority != null && (
               <Content
                 component={ContentVariants.small}
                 style={{
@@ -155,7 +155,7 @@ function TopSection({
                   color: "var(--pf-t--global--text--color--subtle)",
                 }}
               >
-                (order {rule.ruleOrder})
+                (priority {rule.priority})
               </Content>
             )}
           </DescriptionListDescription>

@@ -194,8 +194,8 @@ function PolicyShadowsTab() {
         <Tbody>
           {shadows.map((s) => (
             <Tr key={`${s.policyA?.id ?? ""}-${s.policyB?.id ?? ""}`}>
-              <Td>{s.policyA?.name ?? "-"} <small>(#{s.policyA?.ruleOrder})</small></Td>
-              <Td>{s.policyB?.name ?? "-"} <small>(#{s.policyB?.ruleOrder})</small></Td>
+              <Td>{s.policyA?.name ?? "-"} <small>(p{s.policyA?.priority})</small></Td>
+              <Td>{s.policyB?.name ?? "-"} <small>(p{s.policyB?.priority})</small></Td>
               <Td>{s.sharedScimGroups?.length ?? 0}</Td>
               <Td>{s.sharedSegments?.length ?? 0}</Td>
               <Td>

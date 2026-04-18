@@ -21,7 +21,7 @@ import type { NamedOption } from "./types";
 export interface VirtualPolicyState {
   name: string;
   action: "ALLOW" | "DENY";
-  ruleOrder: string;
+  priority: string;
   scimGroupIds: string[];
   segmentIds: string[];
   segmentGroupIds: string[];
@@ -30,7 +30,7 @@ export interface VirtualPolicyState {
 export const DEFAULT_VIRTUAL_POLICY: VirtualPolicyState = {
   name: "",
   action: "ALLOW",
-  ruleOrder: "1",
+  priority: "1000",
   scimGroupIds: [],
   segmentIds: [],
   segmentGroupIds: [],
@@ -39,12 +39,12 @@ export const DEFAULT_VIRTUAL_POLICY: VirtualPolicyState = {
 export function isVirtualPolicyValid(v: VirtualPolicyState): boolean {
   const hasOperand =
     v.scimGroupIds.length + v.segmentIds.length + v.segmentGroupIds.length > 0;
-  const orderNum = Number(v.ruleOrder);
+  const priorityNum = Number(v.priority);
   return Boolean(
     v.name.trim() &&
       (v.action === "ALLOW" || v.action === "DENY") &&
-      v.ruleOrder &&
-      Number.isFinite(orderNum) &&
+      v.priority &&
+      Number.isFinite(priorityNum) &&
       hasOperand,
   );
 }
@@ -103,13 +103,13 @@ export function VirtualPolicyForm({
             </Flex>
           </FormGroup>
 
-          <FormGroup label="Rule order" fieldId="vp-order" isRequired>
+          <FormGroup label="Priority" fieldId="vp-priority" isRequired>
             <TextInput
-              id="vp-order"
+              id="vp-priority"
               type="number"
-              value={value.ruleOrder}
-              onChange={(_, v) => onChange({ ruleOrder: v })}
-              placeholder="1 = evaluated first"
+              value={value.priority}
+              onChange={(_, v) => onChange({ priority: v })}
+              placeholder="higher = evaluated first"
             />
           </FormGroup>
 
