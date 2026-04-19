@@ -194,7 +194,7 @@ export function VirtualPolicyView() {
           virtualPolicy: new server.VirtualPolicyInput({
             name: policy.name,
             action: policy.action,
-            ruleOrder: policy.ruleOrder,
+            priority: policy.priority,
             scimGroupIds: policy.scimGroupIds,
             segmentIds: policy.segmentIds,
             segmentGroupIds: policy.segmentGroupIds,
@@ -275,7 +275,7 @@ export function VirtualPolicyView() {
                 variant="primary"
                 isDisabled={!canRun}
                 isLoading={submitting}
-                onClick={handleRun}
+                onClick={() => void handleRun()}
               >
                 Run comparison
               </Button>

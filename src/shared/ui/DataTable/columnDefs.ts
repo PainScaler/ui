@@ -157,7 +157,6 @@ export const columnDefs: Record<TableKey, Entry[]> = {
     "priority",
     { key: "reauthIdleTimeout", visible: false },
     { key: "reauthTimeout", visible: false },
-    { key: "ruleOrder", visible: false },
     { key: "zpnIsolationProfileId", visible: false },
     { key: "zpnInspectionProfileId", visible: false },
     { key: "zpnInspectionProfileName", visible: false },

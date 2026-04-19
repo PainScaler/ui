@@ -7,7 +7,15 @@ import reactDom from "eslint-plugin-react-dom";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-  globalIgnores(["dist", "wailsjs"]),
+  globalIgnores([
+    "dist",
+    "coverage",
+    "wailsjs",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "vitest.config.ts",
+    "src/shared/api/*.gen.ts",
+  ]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [

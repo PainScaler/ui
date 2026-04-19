@@ -37,7 +37,7 @@ export const RoutesPage: React.FunctionComponent = () => {
   const [selectedCol, setSelectedCol] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const routes = data?.routes ?? [];
+  const routes = useMemo(() => data?.routes ?? [], [data]);
 
   const filtered = useMemo(() => {
     let result = routes;
@@ -104,8 +104,16 @@ export const RoutesPage: React.FunctionComponent = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {filtered.slice(0, 500).map((route, i) => (
-            <Tr key={i}>
+          {filtered.slice(0, 500).map((route, i) => {
+            const rowKey = [
+              route.scimGroup?.id,
+              route.policy?.id,
+              route.connectorGroup?.id,
+              route.segmentGroup?.id,
+              route.segment?.id,
+            ].join("|");
+            return (
+            <Tr key={rowKey}>
               <Td dataLabel="#">{i + 1}</Td>
               {COLUMNS.map((col) => {
                 const entry = route[col.key];
@@ -127,7 +135,8 @@ export const RoutesPage: React.FunctionComponent = () => {
                 );
               })}
             </Tr>
-          ))}
+            );
+          })}
         </Tbody>
       </Table>
       {filtered.length > 500 && (

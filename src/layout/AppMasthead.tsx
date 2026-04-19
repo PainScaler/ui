@@ -126,7 +126,7 @@ export const AppMasthead: React.FunctionComponent = () => {
                     }}
                   />
                 }
-                onClick={handleRefresh}
+                onClick={() => void handleRefresh()}
                 isDisabled={isRefreshing}
               />
             </ToolbarItem>
@@ -187,7 +187,7 @@ export const AppMasthead: React.FunctionComponent = () => {
               <DropdownList>
                 <DropdownItem
                   aria-label="Refresh data"
-                  onClick={handleRefresh}
+                  onClick={() => void handleRefresh()}
                   isDisabled={isRefreshing}
                   icon={
                     <SyncAltIcon
@@ -239,7 +239,7 @@ export const AppMasthead: React.FunctionComponent = () => {
               <DropdownList>
                 <DropdownItem
                   aria-label="Refresh data"
-                  onClick={handleRefresh}
+                  onClick={() => void handleRefresh()}
                   isDisabled={isRefreshing}
                   icon={
                     <SyncAltIcon

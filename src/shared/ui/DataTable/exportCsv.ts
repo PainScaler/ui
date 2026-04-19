@@ -1,4 +1,5 @@
 import type { Column } from "./types";
+import { formatCell } from "./formatCell";
 
 const escapeField = (s: string): string => {
   if (s.includes(",") || s.includes('"') || s.includes("\n") || s.includes("\r")) {
@@ -17,7 +18,7 @@ export function buildCsv(
       columns
         .map((c) => {
           const raw = row[c.key];
-          const text = c.toText ? c.toText(raw) : String(raw ?? "");
+          const text = c.toText ? c.toText(raw) : formatCell(raw);
           return escapeField(text);
         })
         .join(","),

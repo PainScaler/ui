@@ -22,6 +22,8 @@ interface Lib {
   version: string;
 }
 
+const BUILD_YEAR = new Date().getFullYear();
+
 const FRONTEND_LIBS: Lib[] = [
   { name: "React", version: "19.2" },
   { name: "React Router", version: "7.14" },
@@ -66,7 +68,7 @@ export default function MyAboutModal({
     <AboutModal
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
-      trademark={`(c) ${new Date().getFullYear()} PainScaler. ZPA is a trademark of Zscaler, Inc.`}
+      trademark={`(c) ${BUILD_YEAR} PainScaler. ZPA is a trademark of Zscaler, Inc.`}
       brandImageSrc={logo}
       brandImageAlt="PainScaler Logo"
       backgroundImageSrc={bg}

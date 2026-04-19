@@ -239,7 +239,7 @@ export namespace analysis {
 		id: string;
 		name: string;
 		action: string;
-		ruleOrder: number;
+		priority: number;
 
 		static createFrom(source: any = {}) {
 			return new PolicySummary(source);
@@ -250,7 +250,7 @@ export namespace analysis {
 			this["id"] = source["id"];
 			this["name"] = source["name"];
 			this["action"] = source["action"];
-			this["ruleOrder"] = source["ruleOrder"];
+			this["priority"] = source["priority"];
 		}
 	}
 	export class RFPosition {
@@ -2078,7 +2078,7 @@ export namespace server {
 	export class VirtualPolicyInput {
 		name: string;
 		action: string;
-		ruleOrder: string;
+		priority: string;
 		scimGroupIds?: string[];
 		segmentIds?: string[];
 		segmentGroupIds?: string[];
@@ -2091,7 +2091,7 @@ export namespace server {
 			if ('string' === typeof source) source = JSON.parse(source);
 			this["name"] = source["name"];
 			this["action"] = source["action"];
-			this["ruleOrder"] = source["ruleOrder"];
+			this["priority"] = source["priority"];
 			this["scimGroupIds"] = source["scimGroupIds"];
 			this["segmentIds"] = source["segmentIds"];
 			this["segmentGroupIds"] = source["segmentGroupIds"];
@@ -2490,7 +2490,7 @@ export namespace simulator {
 	export class RuleTrace {
 		rule_id?: string;
 		rule_name?: string;
-		rule_order?: number;
+		priority?: number;
 		action?: string;
 		matched?: boolean;
 		skip_reason?: string;
@@ -2504,7 +2504,7 @@ export namespace simulator {
 			if ('string' === typeof source) source = JSON.parse(source);
 			this["rule_id"] = source["rule_id"];
 			this["rule_name"] = source["rule_name"];
-			this["rule_order"] = source["rule_order"];
+			this["priority"] = source["priority"];
 			this["action"] = source["action"];
 			this["matched"] = source["matched"];
 			this["skip_reason"] = source["skip_reason"];

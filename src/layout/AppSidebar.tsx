@@ -27,12 +27,12 @@ export const AppSidebar: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (isGraphPage && isSidebarOpen) onSidebarToggle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-x/exhaustive-deps
   }, [location.pathname]);
 
   const handleSelect = (_event: unknown, selectedItem: { itemId: string | number }) => {
     if (typeof selectedItem.itemId === "string") {
-      navigate(selectedItem.itemId);
+      void navigate(selectedItem.itemId);
       if (isSidebarOpen && width < 1200) {
         onSidebarToggle();
       }

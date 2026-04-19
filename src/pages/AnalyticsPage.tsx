@@ -192,10 +192,10 @@ function PolicyShadowsTab() {
           </Tr>
         </Thead>
         <Tbody>
-          {shadows.map((s, i) => (
-            <Tr key={i}>
-              <Td>{s.policyA?.name ?? "-"} <small>(#{s.policyA?.ruleOrder})</small></Td>
-              <Td>{s.policyB?.name ?? "-"} <small>(#{s.policyB?.ruleOrder})</small></Td>
+          {shadows.map((s) => (
+            <Tr key={`${s.policyA?.id ?? ""}-${s.policyB?.id ?? ""}`}>
+              <Td>{s.policyA?.name ?? "-"} <small>(p{s.policyA?.priority})</small></Td>
+              <Td>{s.policyB?.name ?? "-"} <small>(p{s.policyB?.priority})</small></Td>
               <Td>{s.sharedScimGroups?.length ?? 0}</Td>
               <Td>{s.sharedSegments?.length ?? 0}</Td>
               <Td>
@@ -297,7 +297,7 @@ function DomainOverlapsTab() {
         <Tbody>
           {overlaps.flatMap((o, idx) => {
             const parent = (
-              <Tr key={`p-${idx}`}>
+              <Tr key={`p-${o.domain}`}>
                 <Td
                   expand={{ rowIndex: idx, isExpanded: !!expanded[idx], onToggle: () => toggle(idx) }}
                 />
@@ -307,7 +307,7 @@ function DomainOverlapsTab() {
               </Tr>
             );
             const child = expanded[idx] ? (
-              <Tr key={`c-${idx}`} isExpanded>
+              <Tr key={`c-${o.domain}`} isExpanded>
                 <Td />
                 <Td colSpan={3}>
                   <ExpandableRowContent>
